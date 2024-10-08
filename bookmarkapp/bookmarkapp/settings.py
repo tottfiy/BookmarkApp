@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
+    'bookmarkapi',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +50,13 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    # "coresheaders.middleware.CorsMiddleware",
+
 ]
+# REST_FRAMEWROK = {'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']}
+#
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "bookmarkapp.urls"
 
@@ -67,7 +76,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "bookmarkapp.wsgi.application"
+WSGI_APPLICATION = 'bookmarkapp.wsgi.application'
+
 
 
 # Database
@@ -79,7 +89,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
