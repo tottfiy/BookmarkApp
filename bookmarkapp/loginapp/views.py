@@ -56,16 +56,15 @@ def test_token(request):
 @permission_classes([IsAuthenticated])
 def logout(request):
     try:
-        # Extract the refresh token from the request data
         refresh_token = request.data.get('refresh')
         if refresh_token is None:
             return Response({"detail": "Refresh token is required for logout."},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        # Blacklist the refresh token
         token = RefreshToken(refresh_token)
-        token.blacklist()
+        token.blacklist()  # This should raise an error if the token is invalid
 
         return Response({"detail": "Logout successful."}, status=status.HTTP_205_RESET_CONTENT)
     except Exception as e:
+        print(f"Logout error: {str(e)}")  # Consider using logging instead
         return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
